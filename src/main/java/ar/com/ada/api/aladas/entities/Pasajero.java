@@ -1,6 +1,6 @@
 package ar.com.ada.api.aladas.entities;
 
-import java.util.Date;
+import java.util.*;
 
 import javax.persistence.*;
 
@@ -12,6 +12,14 @@ public class Pasajero extends Persona {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pasajero_id")
     private Integer pasajeroId;
+
+    @OneToMany(mappedBy = "pasajero", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Reserva> reservas = new ArrayList();
+    public void agregarReserva(Reserva reserva){
+        this.reservas.add(reserva);
+        reserva.setPasajero(this);
+    }
+
 
     public Integer getPasajeroId() {
         return pasajeroId;
