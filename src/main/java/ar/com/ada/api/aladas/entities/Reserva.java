@@ -23,7 +23,7 @@ public class Reserva {
     private Pasajero pasajero;
 
     @Column (name = "estado_reserva_id")
-    private Enum estadoReservaId;
+    private Integer estadoReservaId;
     
 
     @Column (name = "fecha_emision")
