@@ -4,6 +4,7 @@ import java.util.*;
 
 import javax.persistence.*;
 
+
 @Entity
 @Table(name = "reserva")
 public class Reserva {
@@ -55,12 +56,12 @@ public class Reserva {
         this.pasajero = pasajero;
     }
 
-    public Enum getEstadoReservaId() {
-        return estadoReservaId;
+    public EstadoReservaEnum getEstadoReservaId() {
+        return EstadoReservaEnum.parse(estadoReservaId);
     }
 
-    public void setEstadoReservaId(Enum estadoReservaId) {
-        this.estadoReservaId = estadoReservaId;
+    public void setEstadoReservaId(EstadoReservaEnum estadoReservaId) {
+        this.estadoReservaId = estadoReservaId.getValue(); 
     }
 
     public Date getFechaEmision() {
@@ -79,6 +80,36 @@ public class Reserva {
         this.fechaVencimiento = fechaVencimiento;
     }
 
+    public enum EstadoReservaEnum{
+        CREADA(1), TRASMITIENDO_AL_PG(2), ERROR_AL_CONECTAR_PG(3), PENDIENTE_DE_PAGO(4), PAGADA(5), CANCELADO_POR_USUARIO(6), CANCELADO_POR_EMPRESA(7), PAGO_RECHAZADO(8), EXPIRADO(9), EMITIDA(10);
+   
+  private final Integer value;
+
+  private EstadoReservaEnum(Integer value){
+      this.value = value;
+  }
+
+  public Integer getValue(){
+      return value;
+  }
+
+  public static EstadoReservaEnum parse(Integer id) {
+      EstadoReservaEnum status = null; // Default
+      for (EstadoReservaEnum item : EstadoReservaEnum.values()) {
+          if (item.getValue().equals(id)) {
+              status = item;
+              break;
+          }
+      }
+      return status;
+  }
+}
+
+
+}
 
     
-}
+
+
+    
+

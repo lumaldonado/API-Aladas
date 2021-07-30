@@ -26,7 +26,6 @@ public class Pais {
         }
     }
 
-    //FALTA ENUM DE TIPODOCUMENTO
     public enum TipoDocuEnum{
         DNI(1), PASAPORTE(2);
 

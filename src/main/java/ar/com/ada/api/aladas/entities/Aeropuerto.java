@@ -8,7 +8,6 @@ public class Aeropuerto {
     
     @Id
     @Column(name = "aeropueto_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer aeropuertoid;
 
     @Column(name = "nombre_aeropuerto")
