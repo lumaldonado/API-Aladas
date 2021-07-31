@@ -4,32 +4,34 @@ import java.util.*;
 
 import javax.persistence.*;
 
-
 @Entity
 @Table(name = "reserva")
 public class Reserva {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "reserva_id")
+    @Column(name = "reserva_id")
     private Integer reservaId;
 
     @ManyToOne
     @JoinColumn(name = "vuelo_id", referencedColumnName = "vuelo_id")
     private Vuelo vuelo;
 
+    @OneToOne(mappedBy = "reserva", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Pasaje pasaje;// en linea 21: se pone en name el nombre del atributo que ahce referencia a la
+                          // tabla
+
     @ManyToOne
     @JoinColumn(name = "pasajero_id", referencedColumnName = "pasajero_id")
     private Pasajero pasajero;
 
-    @Column (name = "estado_reserva_id")
+    @Column(name = "estado_reserva_id")
     private Integer estadoReservaId;
-    
 
-    @Column (name = "fecha_emision")
+    @Column(name = "fecha_emision")
     private Date fechaEmision;
 
-    @Column (name = "fecha_vencimiento")
+    @Column(name = "fecha_vencimiento")
     private Date fechaVencimiento;
 
     public Integer getReservaId() {
@@ -61,7 +63,7 @@ public class Reserva {
     }
 
     public void setEstadoReservaId(EstadoReservaEnum estadoReservaId) {
-        this.estadoReservaId = estadoReservaId.getValue(); 
+        this.estadoReservaId = estadoReservaId.getValue();
     }
 
     public Date getFechaEmision() {
@@ -80,36 +82,39 @@ public class Reserva {
         this.fechaVencimiento = fechaVencimiento;
     }
 
-    public enum EstadoReservaEnum{
-        CREADA(1), TRASMITIENDO_AL_PG(2), ERROR_AL_CONECTAR_PG(3), PENDIENTE_DE_PAGO(4), PAGADA(5), CANCELADO_POR_USUARIO(6), CANCELADO_POR_EMPRESA(7), PAGO_RECHAZADO(8), EXPIRADO(9), EMITIDA(10);
-   
-  private final Integer value;
+    public Pasaje getPasaje() {
+        return pasaje;
+    }
 
-  private EstadoReservaEnum(Integer value){
-      this.value = value;
-  }
+    public void setPasaje(Pasaje pasaje) {
+        this.pasaje = pasaje;
+        pasaje.setReserva(this);
+    } // relacion bidireccional
 
-  public Integer getValue(){
-      return value;
-  }
+    public enum EstadoReservaEnum {
+        CREADA(1), TRASMITIENDO_AL_PG(2), ERROR_AL_CONECTAR_PG(3), PENDIENTE_DE_PAGO(4), PAGADA(5),
+        CANCELADO_POR_USUARIO(6), CANCELADO_POR_EMPRESA(7), PAGO_RECHAZADO(8), EXPIRADO(9), EMITIDA(10);
 
-  public static EstadoReservaEnum parse(Integer id) {
-      EstadoReservaEnum status = null; // Default
-      for (EstadoReservaEnum item : EstadoReservaEnum.values()) {
-          if (item.getValue().equals(id)) {
-              status = item;
-              break;
-          }
-      }
-      return status;
-  }
+        private final Integer value;
+
+        private EstadoReservaEnum(Integer value) {
+            this.value = value;
+        }
+
+        public Integer getValue() {
+            return value;
+        }
+
+        public static EstadoReservaEnum parse(Integer id) {
+            EstadoReservaEnum status = null; // Default
+            for (EstadoReservaEnum item : EstadoReservaEnum.values()) {
+                if (item.getValue().equals(id)) {
+                    status = item;
+                    break;
+                }
+            }
+            return status;
+        }
+    }
+
 }
-
-
-}
-
-    
-
-
-    
-
