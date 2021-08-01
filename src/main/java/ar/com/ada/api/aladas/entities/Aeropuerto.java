@@ -8,36 +8,36 @@ public class Aeropuerto {
     
     @Id
     @Column(name = "aeropueto_id")
-    private Integer aeropuertoid;
+    private Integer aeropuertoId;
 
     @Column(name = "nombre_aeropuerto")
-    private String nombreAeropueto;
+    private String nombre;
 
     @Column(name = "codigo_iata")
-    private String codigoIata;
+    private String codigoIATA;
 
-    public Integer getAeropuertoid() {
-        return aeropuertoid;
+    public Integer getAeropuertoId() {
+        return aeropuertoId;
     }
 
-    public void setAeropuertoid(Integer aeropuertoid) {
-        this.aeropuertoid = aeropuertoid;
+    public void setAeropuertoId(Integer aeropuertoId) {
+        this.aeropuertoId = aeropuertoId;
     }
 
-    public String getNombreAeropueto() {
-        return nombreAeropueto;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setNombreAeropueto(String nombreAeropueto) {
-        this.nombreAeropueto = nombreAeropueto;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public String getCodigoIata() {
-        return codigoIata;
+    public String getCodigoIATA() {
+        return codigoIATA;
     }
 
-    public void setCodigoIata(String codigoIata) {
-        this.codigoIata = codigoIata;
+    public void setCodigoIATA(String codigoIATA) {
+        this.codigoIATA = codigoIATA;
     }
 
     
