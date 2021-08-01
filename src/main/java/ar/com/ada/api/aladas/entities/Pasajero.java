@@ -15,18 +15,43 @@ public class Pasajero extends Persona {
 
     @OneToMany(mappedBy = "pasajero", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Reserva> reservas = new ArrayList();
-    public void agregarReserva(Reserva reserva){
-        this.reservas.add(reserva);
-        reserva.setPasajero(this);
-    }
-
-
+   
     public Integer getPasajeroId() {
         return pasajeroId;
     }
 
     public void setPasajeroId(Integer pasajeroId) {
         this.pasajeroId = pasajeroId;
+    }
+    
+    @OneToOne(mappedBy = "pasajero", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Usuario usuario;
+
+
+    public void agregarReserva(Reserva reserva){
+        this.reservas.add(reserva);
+        reserva.setPasajero(this);
+    }
+
+
+    public List<Reserva> getReservas() {
+        return reservas;
+    }
+
+
+    public void setReservas(List<Reserva> reservas) {
+        this.reservas = reservas;
+    }
+
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+        usuario.setPasajero(this);
     }
     
     

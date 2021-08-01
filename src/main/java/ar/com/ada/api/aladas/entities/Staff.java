@@ -19,5 +19,17 @@ public class Staff extends Persona {
         this.staffId = staffId;
     }
     
+    @OneToOne(mappedBy = "staff", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Usuario usuario;
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+        usuario.setStaff(this);
+    }
+
     
 }

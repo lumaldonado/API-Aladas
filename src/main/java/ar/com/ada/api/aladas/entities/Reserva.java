@@ -19,7 +19,7 @@ public class Reserva {
 
     @OneToOne(mappedBy = "reserva", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Pasaje pasaje;// en linea 21: se pone en name el nombre del atributo que ahce referencia a la
-                          // tabla
+                          // tabla en donde esta la FK
 
     @ManyToOne
     @JoinColumn(name = "pasajero_id", referencedColumnName = "pasajero_id")
