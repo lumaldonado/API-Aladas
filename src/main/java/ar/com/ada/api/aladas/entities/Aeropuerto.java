@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Aeropuerto {
     
     @Id
-    @Column(name = "aeropueto_id")
+    @Column(name = "aeropuerto_id")
     private Integer aeropuertoId;
 
     @Column(name = "nombre_aeropuerto")
