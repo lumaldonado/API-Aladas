@@ -13,8 +13,6 @@ public class Vuelo {
     @Column (name = "vuelo_id")
     private Integer vueloId;
 
-    @Temporal(TemporalType.DATE)
-    @Column 
     private Date fecha;
 
     @Column (name = "estado_vuelo_id")

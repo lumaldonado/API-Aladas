@@ -26,8 +26,14 @@ public class AeropuertoService{
 
         } 
 
+
         public List<Aeropuerto> obtenerTodos(){
             return repo.findAll();
+
+        }
+
+        public Aeropuerto buescarPorCodigoIATA(String codigoIATA){
+            return repo.findByCodigoIATA(codigoIATA);
 
         }
 

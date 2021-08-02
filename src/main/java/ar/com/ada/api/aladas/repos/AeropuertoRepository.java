@@ -9,4 +9,6 @@ public interface AeropuertoRepository extends JpaRepository<Aeropuerto,Integer>{
     //el integer va porque es el tipo de la PK de Aeropuerto,
     //si no fuera de tipo Integer iria otra cosa
 
+    Aeropuerto findByCodigoIATA(String codigoIATA);
+
 }
