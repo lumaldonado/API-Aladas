@@ -10,5 +10,6 @@ public interface AeropuertoRepository extends JpaRepository<Aeropuerto,Integer>{
     //si no fuera de tipo Integer iria otra cosa
 
     Aeropuerto findByCodigoIATA(String codigoIATA);
+    
 
 }

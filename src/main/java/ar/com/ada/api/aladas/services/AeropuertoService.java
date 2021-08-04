@@ -37,5 +37,25 @@ public class AeropuertoService{
 
         }
 
+        public boolean ValidarCodigoIATA(Aeropuerto aeropuerto){
+
+            if (aeropuerto.getCodigoIATA().length() != 3)
+            return false;
+
+            String codigoIATA = aeropuerto.getCodigoIATA();
+
+            for (int i=0; i<codigoIATA.length(); i++){
+                char c = codigoIATA.charAt(i);
+
+                if (!(c>= 'A' && c<='Z'))
+                return false;
+                
+            }
+
+            return true;
+
+         
+        }
+
 }
 
