@@ -3,6 +3,7 @@ import java.math.BigDecimal;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import ar.com.ada.api.aladas.entities.Aeropuerto;
@@ -84,6 +85,19 @@ public class VueloService {
         ERROR_FECHA, ERROR_MONEDA, ERROR_CAPACIDAD_MINIMA, ERROR_CAPACIDAD_MAXIMA,
         ERROR_AEROPUERTOS_IGUALES,
 
+    }
+
+    public Vuelo buscarPorId(Integer id) {
+
+        return repo.findByVueloId(id);
+    }
+
+    public void actualizar(Vuelo vuelo) {
+        repo.save(vuelo);
+    }
+
+    public List<Vuelo> traerVuelosAbiertos() {
+        return repo.findByEstadoVueloId(EstadoVueloEnum.ABIERTO.getValue());
     }
 
 
