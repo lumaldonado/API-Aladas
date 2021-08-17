@@ -9,12 +9,12 @@ import org.hibernate.annotations.NaturalId;
 @Entity
 @Table(name = "usuario")
 public class Usuario {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "usuario_id")
     private Integer usuarioId;
-    
+
     @NaturalId
     private String username;
 
@@ -31,8 +31,8 @@ public class Usuario {
 
     @OneToOne
     @JoinColumn(name = "staff_id", referencedColumnName = "staff_id")
-    //primero se pone en nombre de la columna en esta tabla, 
-    //y despues el nombre de la columna de la tabla de donde viene la FK
+    // primero se pone en nombre de la columna en esta tabla,
+    // y despues el nombre de la columna de la tabla de donde viene la FK
     private Staff staff;
 
     @OneToOne
@@ -104,10 +104,18 @@ public class Usuario {
     }
 
     public Integer obtenerEntityId() {
-        // TODO, segun el tipo de usuario, devolver el pasajeroId o staffId o nada!
+        
+        switch (this.getTipoUsuario()) {
+            case PASAJERO:
+                return this.getPasajero().getPasajeroId();
+            case STAFF:
+                return this.getStaff().getStaffId();
+            default:
+                break;
+
+        }
         return null;
     }
-
 
     public enum TipoUsuarioEnum {
         STAFF(1), PASAJERO(2);
@@ -133,10 +141,5 @@ public class Usuario {
             return status;
         }
     }
-
-
-
-
-
 
 }

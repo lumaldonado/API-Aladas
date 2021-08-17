@@ -55,8 +55,13 @@ public class UsuarioService {
     usuario.setUsername(email);
     usuario.setEmail(email);
     usuario.setPassword(Crypto.encrypt(password, email.toLowerCase()));
+    // primero se pone que se quiere encriptar y despues, como diferenciar las
+    // encriptaciones segun x dato para que sean todas diferentes aun que el dato a
+    // encriptar sea el mismo
     usuario.setTipoUsuario(tipoUsuario);
 
+
+    //pasar a un swtich case
     if (tipoUsuario == TipoUsuarioEnum.PASAJERO) {
       Pasajero pasajero = new Pasajero();
 
@@ -65,11 +70,13 @@ public class UsuarioService {
       pasajero.setFechaNacimiento(fechaNacimiento);
       pasajero.setNombre(nombre);
       pasajero.setTipoDocumentoId(tipoDocumento);
-      pasajero.setUsuario(usuario);
+      pasajero.setUsuario(usuario);// esto hace la relacion bidireccional
 
       pasajeroService.crearPasajero(pasajero);
+      // graba el service de pasajero porque sin pasajero no hay usuario, same staff
 
-    } else { // en este caso, asumios que si no es pasajero es staff
+    } else { // Usamos if solo porque nosotras dijimos que vamos a tener solo 2 tipos de
+             // usuario
       Staff staff = new Staff();
       staff.setDocumento(documento);
       staff.setPaisId(PaisEnum.parse(pais));
@@ -80,10 +87,8 @@ public class UsuarioService {
 
       staffService.crearStaff(staff);
 
-      
     }
 
-    // Todo!
     return usuario;
   }
 

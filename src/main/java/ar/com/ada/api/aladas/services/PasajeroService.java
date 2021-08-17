@@ -8,6 +8,7 @@ import ar.com.ada.api.aladas.repos.PasajeroRepository;
 
 @Service
 public class PasajeroService {
+    
     @Autowired
     PasajeroRepository repo;
 
