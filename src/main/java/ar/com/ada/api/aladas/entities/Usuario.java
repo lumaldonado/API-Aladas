@@ -20,12 +20,13 @@ public class Usuario {
 
     private String password;
 
+    @Column(name = "mail")
     private String email;
 
-    @Column(name = "fecha_login")
+    @Column(name = "fecha_loggin")
     private Date fechalogin;
 
-    @Column(name = "tipo_usuario")
+    @Column(name = "tipo_usuario_id")
     private Integer tipoUsuario;
 
     @OneToOne

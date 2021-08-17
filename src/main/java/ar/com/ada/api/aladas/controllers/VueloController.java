@@ -55,7 +55,7 @@ public class VueloController {
 
     }
 
-    @GetMapping("api/vuelos/abierto")
+    @GetMapping("api/vuelos/abiertos")
     public ResponseEntity<List<Vuelo>> getVuelosAbiertos(){
 
         return ResponseEntity.ok(service.traerVuelosAbiertos());
