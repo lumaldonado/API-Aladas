@@ -1,5 +1,11 @@
 package ar.com.ada.api.aladas.repos;
 
-public interface PasajeRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import ar.com.ada.api.aladas.entities.Pasaje;
+
+@Repository
+public interface PasajeRepository extends JpaRepository<Pasaje, Integer> {
     
 }
