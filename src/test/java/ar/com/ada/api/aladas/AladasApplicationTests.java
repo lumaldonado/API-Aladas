@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import ar.com.ada.api.aladas.entities.Aeropuerto;
+import ar.com.ada.api.aladas.entities.Usuario;
 import ar.com.ada.api.aladas.entities.Vuelo;
 import ar.com.ada.api.aladas.entities.Vuelo.EstadoVueloEnum;
+import ar.com.ada.api.aladas.security.Crypto;
 import ar.com.ada.api.aladas.services.AeropuertoService;
 import ar.com.ada.api.aladas.services.VueloService;
 import ar.com.ada.api.aladas.services.VueloService.ValidacionVueloDataEnum;
@@ -126,6 +128,30 @@ class AladasApplicationTests {
 
 		assertEquals(ValidacionVueloDataEnum.ERROR_AEROPUERTOS_IGUALES, vueloService.validar(vuelo));
 
+	}
+
+	@Test
+	void testearEncriptacion(){
+
+		String contraImaginaria = "pitufoasesino";
+		String contraImaginariaEncriptada = Crypto.encrypt(contraImaginaria, "palabra");
+
+		String contraImaginariaEncriptadaDesencriptada =Crypto.decrypt(contraImaginariaEncriptada, "palabra");
+
+		//assertTrue(contraImaginariaEncriptada.equals(contraImaginaria));
+		assertEquals(contraImaginariaEncriptadaDesencriptada, contraImaginaria);
+
+	}
+    
+	//como el test de abajo falla, volves a probar lo de arriba con los datos que usaste abajo
+	@Test
+	void testearContra(){
+		Usuario usuario = new usuario();
+		usuario.setUsername("algo que pongas en la base de datos");
+		usuario.getPassword("contra usuario que usaste arriba");
+		usuario.getEmail("poner mail");
+
+		assertFalse(!usuario.getPassword().equals(Crypto.encrypt("poner la que el usuario ingresa en postman", usuario.getEmail().toLowerCase())));
 	}
 
 	 

@@ -21,7 +21,7 @@ public class AeropuertoController {
         GenericResponse respuesta = new GenericResponse();
 
         service.crear(aeropuerto.getAeropuertoId(), aeropuerto.getNombre(), aeropuerto.getCodigoIATA());
-
+       //FALTA EL IF EXISTEID AEROPUERTO
         respuesta.isOk = true;
         respuesta.message = "Se creo correctamente";
 
