@@ -37,7 +37,7 @@ public class AeropuertoService{
 
         }
 
-        public boolean ValidarCodigoIATA(Aeropuerto aeropuerto){
+        public boolean validarCodigoIATA(Aeropuerto aeropuerto){
 
             if (aeropuerto.getCodigoIATA().length() != 3)
             return false;
@@ -56,6 +56,32 @@ public class AeropuertoService{
 
          
         }
+
+        public boolean validarAeropuertoExiste(Integer aeropuertoId) {
+            Aeropuerto aeropuerto = repo.findByAeropuertoId(aeropuertoId);
+            if (aeropuerto != null) {
+                return true;
+            } else
+                return false;
+    
+        }
+    
+        public enum ValidacionAeropuertoDataEnum {
+            OK, ERROR_AEROPUERTO_YA_EXISTE, ERROR_CODIGO_IATA
+        }
+    
+        public ValidacionAeropuertoDataEnum validar(Aeropuerto aeropuerto) {
+    
+            if (validarAeropuertoExiste(aeropuerto.getAeropuertoId()))
+                return ValidacionAeropuertoDataEnum.ERROR_AEROPUERTO_YA_EXISTE;
+    
+            if (!validarCodigoIATA(aeropuerto))
+                return ValidacionAeropuertoDataEnum.ERROR_CODIGO_IATA;
+    
+            return ValidacionAeropuertoDataEnum.OK;
+        }
+    
+    }
 
 }
 

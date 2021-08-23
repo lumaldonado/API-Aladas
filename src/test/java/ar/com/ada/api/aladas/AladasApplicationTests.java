@@ -15,6 +15,7 @@ import ar.com.ada.api.aladas.entities.Vuelo.EstadoVueloEnum;
 import ar.com.ada.api.aladas.security.Crypto;
 import ar.com.ada.api.aladas.services.AeropuertoService;
 import ar.com.ada.api.aladas.services.VueloService;
+import ar.com.ada.api.aladas.services.AeropuertoService.ValidacionAeropuertoDataEnum;
 import ar.com.ada.api.aladas.services.VueloService.ValidacionVueloDataEnum;
 
 @SpringBootTest
@@ -79,11 +80,11 @@ class AladasApplicationTests {
 		aeropuerto4.setCodigoIATA(codigoIATAOk4);
 
 
-		assertTrue(aeropuertoService.ValidarCodigoIATA(aeropuerto1));
-		assertTrue(aeropuertoService.ValidarCodigoIATA(aeropuerto2));
-		assertTrue(aeropuertoService.ValidarCodigoIATA(aeropuerto3));
+		assertTrue(aeropuertoService.validarCodigoIATA(aeropuerto1));
+		assertTrue(aeropuertoService.validarCodigoIATA(aeropuerto2));
+		assertTrue(aeropuertoService.validarCodigoIATA(aeropuerto3));
 
-		assertFalse(aeropuertoService.ValidarCodigoIATA(aeropuerto4));
+		assertFalse(aeropuertoService.validarCodigoIATA(aeropuerto4));
 		
 
 	}
@@ -146,13 +147,47 @@ class AladasApplicationTests {
 	//como el test de abajo falla, volves a probar lo de arriba con los datos que usaste abajo
 	@Test
 	void testearContra(){
-		Usuario usuario = new usuario();
-		usuario.setUsername("algo que pongas en la base de datos");
-		usuario.getPassword("contra usuario que usaste arriba");
-		usuario.getEmail("poner mail");
+		Usuario usuario = new Usuario();
+		usuario.setUsername("algo que pongas de la base de datos");
+		usuario.setPassword("contra usuario que usaste arriba pero version encrip");
+		usuario.setEmail("poner mail");
 
 		assertFalse(!usuario.getPassword().equals(Crypto.encrypt("poner la que el usuario ingresa en postman", usuario.getEmail().toLowerCase())));
 	}
+
+	@Test
+	void testearContraseña() {
+		Usuario usuario = new Usuario();
+
+		usuario.setUsername("Diana@gmail.com");
+		usuario.setPassword("qp5TPhgUtIf7RDylefkIbw==");
+		usuario.setEmail("Diana@gmail.com");
+
+		assertFalse(!usuario.getPassword().equals(Crypto.encrypt("AbcdE23", usuario.getUsername().toLowerCase())));
+
+	}
+
+	@Test
+	void testearAeropuertoId(){
+		Aeropuerto aeropuerto = new Aeropuerto();
+		aeropuerto.setAeropuertoId(117);
+		aeropuerto.setCodigoIATA("MDZ");
+		aeropuerto.setNombre("Mendoza");
+
+		assertEquals(ValidacionAeropuertoDataEnum.ERROR_AEROPUERTO_YA_EXISTE, aeropuertoService.validar(aeropuerto));
+	}
+
+
+	@Test
+	void testearAeropuertoCodigoIATA(){
+		Aeropuerto aeropuerto = new Aeropuerto();
+		aeropuerto.setAeropuertoId(17);
+		aeropuerto.setCodigoIATA("  M");
+		aeropuerto.setNombre("Mendoza");	
+
+		assertEquals(ValidacionAeropuertoDataEnum.ERROR_CODIGO_IATA, aeropuertoService.validar(aeropuerto));
+	}
+}
 
 	 
 
