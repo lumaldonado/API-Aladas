@@ -1,3 +1,4 @@
 # API-Aladas
-API REST que permite registrar empleadas de una organizacion o empresa.
-La misma tambien permite cargar empleadas a una base de datos creda usando MySQL, actualizar datos como el sueldo de cada empleada, sus categorias, etc.
+API Rest que permite la reserva y venta de pasajes aéreos. Permite también registrar y cargar usuarios que podrán ser del tipo "pasajeros" o "staff". Los pasajeros podrán buscar vuelos, reservarlos y comprar los pasajes. Los usuarios "staff" podrán cargar aeropuertos, crear vuelos y consultar los estados de esos vuelos.
+
+Tecnologias utilizadas: Java 11 SpringBoot
