@@ -5,6 +5,8 @@ Tecnologias utilizadas: Java 11 SpringBoot
 
 Deploy usando Heroku: https://aladas-luciana-maldonado.herokuapp.com
 
+Documentacion en Postman: https://www.getpostman.com/collections/686715bc763fcc16abfb
+
 Data base: MySQL
 
 
