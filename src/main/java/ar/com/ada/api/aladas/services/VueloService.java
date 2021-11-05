@@ -89,15 +89,36 @@ public class VueloService {
 
     public Vuelo buscarPorId(Integer id) {
 
-        return repo.findByVueloId(id);
+        Optional<Vuelo> opVuelo =  repo.findById(id);
+        Vuelo vuelo = null;
+
+        if(opVuelo.isPresent())
+            vuelo = opVuelo.get();
+
+        return vuelo;
     }
 
+    public boolean existePorId(int id) {
+
+        Vuelo vuelo = repo.findByVueloId(id);
+        return vuelo != null;
+    }
     public void actualizar(Vuelo vuelo) {
         repo.save(vuelo);
     }
 
     public List<Vuelo> traerVuelosAbiertos() {
         return repo.findByEstadoVueloId(EstadoVueloEnum.ABIERTO.getValue());
+    }
+
+    public List<Vuelo> buscarOrigen(Integer id) {
+
+        return repo.findByAeropuertoOrigen(id);
+    }
+
+    public List<Vuelo> buscarDestino(Integer id) {
+
+        return repo.findByAeropuertoDestino(id);
     }
 
 
