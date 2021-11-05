@@ -105,14 +105,8 @@ public class VueloController {
         return ResponseEntity.ok(vuelo);
     }
 
-    @GetMapping("api/vuelos/aeropuertosV2/{id}")
-    public ResponseEntity<List<Vuelo>> getVueloPorDestino(@PathVariable Integer id) {
 
-        List<Vuelo> vuelo = service.buscarDestino(id);
-        return ResponseEntity.ok(vuelo);
-    }
-
-    @GetMapping("api/vuelos/{id}/estadov2")
+    @GetMapping("api/vuelos/{id}/estado")
     //@PreAuthorize("hasAuthority('CLAIM_userType_STAFF')") //Spring expression language
     public ResponseEntity<?> getEstadoVueloV2(@PathVariable Integer id) {
       
