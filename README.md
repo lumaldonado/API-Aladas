@@ -3,6 +3,8 @@ API Rest que permite la reserva y venta de pasajes aéreos. Permite también reg
 
 Tecnologias utilizadas: Java 11 SpringBoot
 
+Deploy usando Heroku: https://aladas-luciana-maldonado.herokuapp.com
+
 Data base: MySQL
 
 
